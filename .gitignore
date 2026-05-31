@@ -1,0 +1,10 @@
+﻿__pycache__/
+*.pyc
+.venv/
+env/
+
+# Ignore data files
+*.db
+*.csv
+data/
+Scripts/
