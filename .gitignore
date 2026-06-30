@@ -7,7 +7,7 @@ env/
 *.db
 *.csv
 data/
-Scripts/
+
 
 #Ignore the credentials
 creds/
