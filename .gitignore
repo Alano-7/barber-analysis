@@ -8,3 +8,6 @@ env/
 *.csv
 data/
 Scripts/
+
+#Ignore the credentials
+creds/
