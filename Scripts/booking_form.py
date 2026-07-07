@@ -27,7 +27,7 @@ sheet = client.open_by_key(
     "1XKe0tq8TFIZjTFVPOFAjHiH3IGdbSoH2A-aIzzCAmx0"
 ).sheet1
 
-print(sheet.title) ####CHANGE 1
+#print(sheet.title) ####CHANGE 1
 
 # -----------------------------
 # WRITE FUNCTION (FIXED)
@@ -44,12 +44,12 @@ def write_booking(name, service, selected_time, visited_before):
         visited_before
     ])
 
-print(sheet.get_all_values())#####CHANGE 2
+#print(sheet.get_all_values())#####CHANGE 2
 # -----------------------------
 # UI TITLE
 # -----------------------------
-st.title("Barber Booking System")
-
+st.title("Book your appointment")
+st.info("📅 Barber closed on Tuesdays and Sundays.")
 
 # -----------------------------
 # GET SLOTS FROM BACKEND
@@ -84,10 +84,10 @@ name = st.text_input("Name and Surname:")
 service = st.selectbox(
     "Select your service:",
     [
-        "Haircut (R100)",
-        "Haircut and beard trim (R140)",
-        "Beard trim (R40)",
-        "Lineup (R50)"
+        "Trim or beard shave (R80)",
+        "Normal haircut (R140)",
+        "Cut and shave (R180)",
+        "Cut and wash (R200)"
     ]
 )
 

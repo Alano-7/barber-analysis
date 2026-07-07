@@ -46,29 +46,39 @@ for event in events["items"]:
 all_possible_slots=[]
 today= datetime.today()
 
-start_hour=9
-end_hour=17
-slot_minutes=30
+#start and end hour was here
+slot_minutes=20
 
-for i in range(7):
+for i in range (7):
+    current_day= today + timedelta(days=i)
 
-    current_day = today + timedelta(days=i)
+    weekday=current_day.weekday()
 
-    if current_day.weekday() !=6:
-        for hour in range(start_hour, end_hour):
+    #M,W,T,F
+    if weekday in [0,2,3,4]:
+        start_hour = 9
+        end_hour = 18
 
-            for minute in range(0,60,slot_minutes):
+    #S
+    elif weekday ==5:
+        start_hour=8
+        end_hour=16
+    #T&S
+    else:
+        continue
+    for hour in range(start_hour, end_hour):
+        for minute in range(0,60,slot_minutes):
+            slot_time =current_day.replace(
+                hour=hour,
+                minute=minute,
+                second=0,
+                microsecond=0
+            )
 
-                slot_time =current_day.replace(
-                    hour=hour,
-                    minute=minute,
-                    second=0,
-                    microsecond=0
-                )
+            all_possible_slots.append(slot_time)    
 
-                all_possible_slots.append(slot_time)
 
-                print(slot_time)
+                
         
 available_slots=[]
 
@@ -76,13 +86,9 @@ for slot in all_possible_slots:
     if slot not in booked_slots:
         available_slots.append(slot)
 
-print("Availible slots")
-for slot in available_slots:
-    print(slot)        
+       
 
 #Function to be used in the booking form!!!
 def get_slots():
     return available_slots
 
-if slot not in booked_slots:
-    available_slots.append(slot)

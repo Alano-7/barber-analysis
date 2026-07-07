@@ -27,7 +27,7 @@ for _, row in df.iterrows():
         "%Y-%m-%d %H:%M"
     )
 
-    end = start + timedelta(hours=1)
+    end = start + timedelta(minutes=20)
 
     # CHECK FIRST
     existing = service.events().list(

@@ -2,7 +2,7 @@ import streamlit as st
 import sqlite3
 import pandas as pd
 import plotly.express as px
-
+from datetime import datetime, timedelta
 # -----------------------------
 # DATABASE CONNECTION
 # -----------------------------
@@ -13,6 +13,17 @@ conn = sqlite3.connect(
 df = pd.read_csv(
     r"C:\Users\alano\OneDrive\Documents\barber_analysis\data\cleaned_barber_data.csv"
 )
+
+today=datetime.today()
+#Start of current week
+week_start = today - timedelta(days=today.weekday())
+#Ending of week
+week_end = week_start + timedelta(days=5)
+
+print("Current week: ")
+print(week_start.date())
+print(week_end.date())
+
 
 # =============================
 # WEEKLY ACTIVITY
