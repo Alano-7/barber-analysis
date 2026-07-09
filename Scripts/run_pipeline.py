@@ -1,15 +1,19 @@
 import subprocess
+import sys
 
-print("Starting extraction...")
-subprocess.run(["python", r"C:\Users\alano\OneDrive\Documents\barber_analysis\Scripts\extract_google.py"])
+CREATE_NO_WINDOW = 0x08000000
 
-print("Starting transformation...")
-subprocess.run(["python", r"C:\Users\alano\OneDrive\Documents\barber_analysis\Scripts\clean.py"])
+scripts = [
+    r"C:\Users\alano\OneDrive\Documents\barber_analysis\Scripts\extract_google.py",
+    r"C:\Users\alano\OneDrive\Documents\barber_analysis\Scripts\clean.py",
+    r"C:\Users\alano\OneDrive\Documents\barber_analysis\Scripts\load.py"
+]
 
-print("Starting loading...")
-subprocess.run(["python", r"C:\Users\alano\OneDrive\Documents\barber_analysis\Scripts\load.py"])
-
-print("Pipeline complete!")
-
-print("Presenting dashboard...")
-subprocess.run(["python", r"C:\Users\alano\OneDrive\Documents\barber_analysis\Scripts\dash.py"])
+for script in scripts:
+    subprocess.run(
+        [sys.executable, script],
+        creationflags=CREATE_NO_WINDOW,
+        check=True
+    )
+#print("Presenting dashboard...")
+#subprocess.run(["python", r"C:\Users\alano\OneDrive\Documents\barber_analysis\Scripts\dash.py"])

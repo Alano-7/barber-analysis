@@ -11,3 +11,4 @@ data/
 
 #Ignore the credentials
 creds/
+.streamlit/secrets.toml

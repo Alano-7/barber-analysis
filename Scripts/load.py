@@ -1,5 +1,6 @@
 import pandas as pd
 import sqlite3
+import streamlit as st
 from google.oauth2.service_account import Credentials
 from googleapiclient.discovery import build
 from datetime import datetime, timedelta
@@ -13,8 +14,8 @@ print(df)
 SCOPES =["https://www.googleapis.com/auth/calendar"]
 SERVICE_ACCOUNT_FILE=r"C:\Users\alano\OneDrive\Documents\barber_analysis\creds\service_account.json.json"
 
-creds=Credentials.from_service_account_file(
-    SERVICE_ACCOUNT_FILE,
+creds = Credentials.from_service_account_info(
+    st.secrets["gcp_service_account"],
     scopes=SCOPES
 )
 
@@ -31,7 +32,7 @@ for _, row in df.iterrows():
 
     # CHECK FIRST
     existing = service.events().list(
-        calendarId="e175e2162f7075126eb97fd795c30fac4830f5511f3b06beb206fe7ef7e11844@group.calendar.google.com",
+        calendarId="0de5ec9c5517c39f0e210c197455f52a68559732388e8870d1d2be626a959e36@group.calendar.google.com",
         timeMin=start.isoformat() +"Z",
         timeMax=end.isoformat() +"Z",
         privateExtendedProperty=f"booking_id={row['booking_id']}",
@@ -67,7 +68,7 @@ for _, row in df.iterrows():
 
     try:
         service.events().insert(
-            calendarId="e175e2162f7075126eb97fd795c30fac4830f5511f3b06beb206fe7ef7e11844@group.calendar.google.com",
+            calendarId="0de5ec9c5517c39f0e210c197455f52a68559732388e8870d1d2be626a959e36@group.calendar.google.com",
             body=event
         ).execute()
 

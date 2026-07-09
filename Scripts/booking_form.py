@@ -12,10 +12,15 @@ SCOPES = [
     "https://www.googleapis.com/auth/drive"
 ]
 
-SERVICE_ACCOUNT_FILE = r"C:\Users\alano\OneDrive\Documents\barber_analysis\creds\service_account.json.json"
+#SERVICE_ACCOUNT_FILE = r"C:\Users\alano\OneDrive\Documents\barber_analysis\creds\service_account.json.json"
 
-creds = Credentials.from_service_account_file(
-    SERVICE_ACCOUNT_FILE,
+#creds=Credentials.from_service_account_file(
+    #SERVICE_ACCOUNT_FILE,
+    #scopes=SCOPES
+#)
+
+creds = Credentials.from_service_account_info(
+    st.secrets["gcp_service_account"],
     scopes=SCOPES
 )
 
@@ -24,7 +29,7 @@ client = gspread.authorize(creds)
 
 
 sheet = client.open_by_key(
-    "1XKe0tq8TFIZjTFVPOFAjHiH3IGdbSoH2A-aIzzCAmx0"
+    "14glgcEmUi9mkUcpiBjqLeAQ5E4eeBffXe_g2NCMopbk"
 ).sheet1
 
 #print(sheet.title) ####CHANGE 1

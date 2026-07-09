@@ -1,7 +1,7 @@
 import gspread
 import pandas as pd
 from google.oauth2.service_account import Credentials
-
+import streamlit as st
 #This is the path to the RELATIVE path to the json file
 SERVICE_ACCOUNT_FILE=r"C:\Users\alano\OneDrive\Documents\barber_analysis\creds\service_account.json.json"
 
@@ -11,16 +11,16 @@ SCOPES=["https://www.googleapis.com/auth/spreadsheets",
     
 
 #Authetication, loging in as Robot/Waiter
-creds=Credentials.from_service_account_file(
-    SERVICE_ACCOUNT_FILE,
+#)
+
+creds=Credentials.from_service_account_info(
+    st.secrets["gcp_service_account"],
     scopes=SCOPES
-
 )
-
 client=gspread.authorize(creds)
 
 #Opening the sheet
-sheet=client.open_by_key("1XKe0tq8TFIZjTFVPOFAjHiH3IGdbSoH2A-aIzzCAmx0").sheet1
+sheet=client.open_by_key("14glgcEmUi9mkUcpiBjqLeAQ5E4eeBffXe_g2NCMopbk").sheet1
 
 #GETTING ALL ROWS
 data=sheet.get_all_records()

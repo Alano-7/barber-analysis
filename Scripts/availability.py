@@ -1,13 +1,18 @@
 from google.oauth2.service_account import Credentials
 from googleapiclient.discovery import build
 from datetime import datetime, timedelta
-
+import streamlit as st
 
 SCOPES =["https://www.googleapis.com/auth/calendar"] #WHAT IDENTITIES IM USING
-SERVICE_ACCOUNT_FILE=r"C:\Users\alano\OneDrive\Documents\barber_analysis\creds\service_account.json.json"
+#SERVICE_ACCOUNT_FILE=r"C:\Users\alano\OneDrive\Documents\barber_analysis\creds\service_account.json.json"
 
-creds = Credentials.from_service_account_file(
-    SERVICE_ACCOUNT_FILE,
+#creds = Credentials.from_service_account_file(
+#    SERVICE_ACCOUNT_FILE,
+#    scopes=SCOPES
+#)
+
+creds = Credentials.from_service_account_info(
+    st.secrets["gcp_service_account"],
     scopes=SCOPES
 )
 
@@ -15,7 +20,7 @@ creds = Credentials.from_service_account_file(
 service=build("calendar","v3",credentials=creds)
 
 events = service.events().list(
-    calendarId="e175e2162f7075126eb97fd795c30fac4830f5511f3b06beb206fe7ef7e11844@group.calendar.google.com",
+    calendarId="0de5ec9c5517c39f0e210c197455f52a68559732388e8870d1d2be626a959e36@group.calendar.google.com",
     singleEvents=True
 ).execute()
 
